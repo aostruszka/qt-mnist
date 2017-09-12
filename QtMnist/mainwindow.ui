@@ -132,6 +132,7 @@ to the network looks like</string>
      <string>File</string>
     </property>
     <addaction name="actionExportImg"/>
+    <addaction name="actionImportImg"/>
     <addaction name="actionOpenDB"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -150,6 +151,11 @@ to the network looks like</string>
   <action name="actionOpenDB">
    <property name="text">
     <string>Open DB</string>
+   </property>
+  </action>
+  <action name="actionImportImg">
+   <property name="text">
+    <string>Import img</string>
    </property>
   </action>
  </widget>

@@ -23,6 +23,7 @@ private:
     void load_img();
 
     void export_img();
+    void import_img();
 
     Ui::MainWindow *ui;
 };

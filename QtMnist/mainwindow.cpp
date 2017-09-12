@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->scaledDigitArea->set_read_only();
 
     connect(ui->actionExportImg, &QAction::triggered, this, &MainWindow::export_img);
+    connect(ui->actionImportImg, &QAction::triggered, this, &MainWindow::import_img);
     connect(ui->actionOpenDB,    &QAction::triggered, this, &MainWindow::open_db);
     connect(ui->convertBtn, &QPushButton::clicked, [this]() {
         ui->digitArea->fill_bytes(img_bytes);
@@ -158,4 +159,21 @@ void MainWindow::export_img()
         return;
     }
     file.write(img_bytes);
+}
+
+void MainWindow::import_img()
+{
+    QString fname = QFileDialog::getOpenFileName(this, "Import raw image data", ".");
+    if (fname.isEmpty())
+        return;
+
+    QFile file(fname);
+    if (! file.open(QFile::ReadOnly) || file.size() != IMG_SIZE) {
+        QMessageBox::critical(this, "Error", "Could not open file, or it has wrong size");
+        return;
+    }
+
+    img_bytes = file.readAll();
+    ui->scaledDigitArea->set_img(img_bytes.data());
+    ui->testBtn->setEnabled(true);
 }
