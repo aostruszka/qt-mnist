@@ -93,7 +93,7 @@ void MainWindow::test_img()
 
     float* data = input.mutable_data<float>();
     for (int i = 0; i < img_bytes.size(); ++i)
-        *data++ = float(img_bytes[i])/256.f;
+        *data++ = static_cast<unsigned char>(img_bytes[i])/256.f;
 
     if (! predictor->run(input_vec, &output_vec) || output_vec.size() < 1
                                                  || output_vec[0]->size() != 10)
